@@ -331,7 +331,7 @@ current_state = NodePath("Ground")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("8_yi76h")
-Sword = ExtResource("11_cgj2q")
+SwordScene = ExtResource("11_cgj2q")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state", "hanging_state")]
 script = ExtResource("9_sg48e")
@@ -347,8 +347,6 @@ ground_state = NodePath("../Ground")
 [node name="Hanging" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
 script = ExtResource("9_nsu0j")
 air_state = NodePath("../Air")
-jump_velocity = null
-jump_animation = null
 
 [node name="Attack" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("10_io4on")
@@ -366,7 +364,6 @@ script = ExtResource("11_xtov4")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Muzzle" type="Marker2D" parent="."]
-visible = false
-position = Vector2(0, 15)
+position = Vector2(3, 15)
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]

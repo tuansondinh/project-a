@@ -2,12 +2,17 @@ extends Area2D
 class_name Sword
 
 @export var speed = 750
-@onready var state_machine : WeaponStateMachine = $WeaponStateMachine
+@onready var collision_shape: CollisionPolygon2D = $CollisionPolygon2D
 var entered = false
+var face_dir: int
 
 func _physics_process(delta):
+	#print(face_dir)
 	if not entered:
-		position += transform.x * speed * delta
+		if face_dir == 1:
+			position += transform.x * speed * delta
+		elif face_dir == -1:
+			position -= transform.x * speed * delta
 	
 
 func _on_Bullet_body_entered(body):
@@ -26,4 +31,5 @@ func _on_body_entered(body):
 	print(body)
 	if body is TileMap: 
 		entered = true
+
 

@@ -14,20 +14,16 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
 
-var is_hanging = false
-
 func _ready():
 	animation_tree.active = true
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor() and not is_hanging:
-		pass
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_vector("left", "right", "up", "down")
-	
+	if direction.x != 0:
+		state_machine.face_dir = direction.x
 	# Control whether to move or not to move
 	if direction.x != 0 && state_machine.check_if_can_move():
 

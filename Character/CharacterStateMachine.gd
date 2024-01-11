@@ -2,6 +2,8 @@ extends StateMachine
 
 class_name CharacterStateMachine
 
+var face_dir: int = 1
+
 func _ready():
 	for child in get_children():
 		if(child is CharacterState):
@@ -20,6 +22,7 @@ func _physics_process(delta):
 		switch_states(current_state.next_state)
 		
 	current_state.state_process(delta)
+	print(face_dir)
 
 func check_if_can_move():
 	return current_state.can_move

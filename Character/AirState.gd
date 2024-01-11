@@ -20,6 +20,8 @@ func state_process(delta):
 		next_state = landing_state
 		
 func state_input(event : InputEvent):
+	var direction = Input.get_vector("left", "right", "up", "down")
+
 	var muzzle: Marker2D = character.get_node("Muzzle")
 	if(event.is_action_pressed("jump") && !has_double_jumped):
 		double_jump()
@@ -27,16 +29,15 @@ func state_input(event : InputEvent):
 		sword = Sword.instantiate()
 		character.owner.add_child(sword)
 		sword.transform = muzzle.global_transform
-	if Input.is_action_just_pressed("ui_down"):
-		print("bre")
+		sword.face_dir = state_machine.face_dir
+	if Input.is_action_just_pressed("ui_down") && sword != null:
 	#	position.x = sword.position.x
 		character.position.x = sword.position.x
 		if not character.is_on_floor():
-			print("brooo")
 			character.position.y = sword.position.y
 			print(sword.entered)
 			if sword.entered:
-				next_state = hanging_state
+				next_state = state_machine.switch_states(hanging_state, {"sword": sword})
 			else:
 				sword.queue_free()
 

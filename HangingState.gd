@@ -8,6 +8,7 @@ class_name HangingState
 @export var jump_animation : String = "jump_start"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var has_double_jumped = false
+var sword : Sword
 
 func state_process(delta):
 	character.velocity.y = 0
@@ -20,13 +21,14 @@ func state_input(event : InputEvent):
 		
 func jump():
 	can_move = true
-	character.is_hanging = false
 	character.velocity.y = jump_velocity
 	next_state = air_state
 	playback.travel(jump_animation)
+	sword.queue_free()
 
-func on_enter(_msg := {}) -> void:
-	print("jo")
+func on_enter(msg := {}) -> void:
+	print(msg)
+	sword = msg.get("sword")
 	playback.travel("jump_end")
 	can_move = false	
 
