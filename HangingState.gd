@@ -1,6 +1,4 @@
 extends CharacterState
-
-
 class_name HangingState
 
 @export var air_state : State

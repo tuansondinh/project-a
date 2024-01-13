@@ -2,9 +2,10 @@ extends State
 
 class_name CharacterState
 
-@export var character: CharacterBody2D
+@export var character: Player
 @export var can_move: bool = true
 @export var can_attack: bool = true
+
 @export var muzzle: Marker2D
 
 func state_process(delta) -> void:

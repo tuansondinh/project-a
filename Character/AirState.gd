@@ -4,53 +4,55 @@ class_name AirState
 
 @export var landing_state : State
 @export var hanging_state : State
+@export var attack_state  : State
 @export var jump_velocity : float = -150.0
 @export var jump_animation : String = "jump_start"
 @export var landing_animation : String = "jump_end"
-@export var double_jump_velocity : float = -100
+@export var wall_jump_velocity : float = -100
 @export var double_jump_animation : String = "double_jump"
+@export var push_back_velocity: float = 3000
 @export var Sword : PackedScene
 var sword: Sword
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var has_double_jumped = false
 
 func state_process(delta):
+	print(character.velocity.x)
 	character.velocity.y += gravity * delta
-	if(character.is_on_floor()):
+	if character.is_on_floor():
 		next_state = landing_state
+	#wall_slide(delta)
 		
 func state_input(event : InputEvent):
-	var direction = Input.get_vector("left", "right", "up", "down")
+	if event.is_action_pressed("jump") && character.is_on_wall():
+		character.velocity.y = wall_jump_velocity
+		if state_machine.face_dir == 1:
+			character.velocity.x = -push_back_velocity
+		else:
+			character.velocity.x = push_back_velocity
 
-	var muzzle: Marker2D = character.get_node("Muzzle")
-	if(event.is_action_pressed("jump") && !has_double_jumped):
-		double_jump()
 	if event.is_action_pressed("ui_right"):
-		sword = Sword.instantiate()
-		character.owner.add_child(sword)
-		sword.transform = muzzle.global_transform
-		sword.face_dir = state_machine.face_dir
-	if Input.is_action_just_pressed("ui_down") && sword != null:
-	#	position.x = sword.position.x
-		character.position.x = sword.position.x
-		if not character.is_on_floor():
-			character.position.y = sword.position.y
-			print(sword.entered)
-			if sword.entered:
-				next_state = state_machine.switch_states(hanging_state, {"sword": sword})
-			else:
-				sword.queue_free()
+		if state_machine.has_sword:
+			character.throw_sword()
+		else:
+			character.warp()
+	if event.is_action_pressed("ui_left") && state_machine.has_sword:
+		next_state = attack_state
+	
+		
+func wall_slide(delta):
+	if character.is_on_wall():
+		gravity = 100
+	else:
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	
 
 func on_enter(msg:= {}):
 	if msg.has("do_jump"):
 		character.velocity.y = jump_velocity
 		playback.travel(jump_animation)
+		
 func on_exit():
 	if(next_state == landing_state):
 		playback.travel(landing_animation)
 		has_double_jumped = false
-
-func double_jump():
-	character.velocity.y = double_jump_velocity
-	playback.travel(double_jump_animation)
-	has_double_jumped = true

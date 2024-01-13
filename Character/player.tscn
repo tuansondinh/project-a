@@ -297,8 +297,10 @@ states/jump_start/position = Vector2(391, -5.75)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_i4ph4"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_2puwh"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_50dqq"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_3ny4h"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_kd0lq"), "double_jump", "jump_end", SubResource("AnimationNodeStateMachineTransition_8aae2")]
 graph_offset = Vector2(47.7799, -40.755)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hanging_state")]
 script = ExtResource("1_flj5s")
+hanging_state = NodePath("CharacterStateMachine/HangingState")
+SwordScene = ExtResource("11_cgj2q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
@@ -329,30 +331,35 @@ character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 current_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine"]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "hanging_state", "attack_state")]
 script = ExtResource("8_yi76h")
+air_state = NodePath("../Air")
+hanging_state = NodePath("../HangingState")
+attack_state = NodePath("../Attack")
 SwordScene = ExtResource("11_cgj2q")
-
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state", "hanging_state")]
-script = ExtResource("9_sg48e")
-landing_state = NodePath("../Landing")
-hanging_state = NodePath("../Hanging")
-Sword = ExtResource("11_cgj2q")
 
 [node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("10_e7jjg")
 landing_animation_name = "jump_end"
 ground_state = NodePath("../Ground")
 
-[node name="Hanging" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
+[node name="HangingState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
 script = ExtResource("9_nsu0j")
 air_state = NodePath("../Air")
 
-[node name="Attack" type="Node" parent="CharacterStateMachine"]
+[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "hanging_state")]
 script = ExtResource("10_io4on")
+air_state = NodePath("../Air")
+hanging_state = NodePath("../HangingState")
 Sword = ExtResource("11_cgj2q")
 
 [node name="Move" type="Node" parent="CharacterStateMachine"]
+
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state", "hanging_state", "attack_state")]
+script = ExtResource("9_sg48e")
+landing_state = NodePath("../Landing")
+hanging_state = NodePath("../HangingState")
+attack_state = NodePath("../Attack")
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -50.0

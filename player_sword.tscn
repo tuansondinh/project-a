@@ -1,6 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcnnl2l6juayg"]
+[gd_scene load_steps=4 format=3 uid="uid://b027pw4eh7e4c"]
 
-[ext_resource type="Script" path="res://player_sword.gd" id="1_t502l"]
+[sub_resource type="GDScript" id="GDScript_ex78x"]
+script/source = "extends Area2D
+
+
+@export var speed = 750
+
+var entered = false
+
+func _physics_process(delta):
+	if not entered:
+		position += transform.x * speed * delta
+	
+
+func _on_Bullet_body_entered(body):
+	if body.is_in_group(\"mobs\"):
+		body.queue_free()
+	queue_free()
+	print(body)
+
+
+func _on_area_entered(area):
+	position = position
+	print(area)
+
+	pass # Replace with function body.
+
+
+func _on_body_entered(body):
+	print(body)
+	if body is TileMap: 
+		entered = true
+
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n7c5h"]
 size = Vector2(11.356, 1.09471)
@@ -9,7 +41,7 @@ size = Vector2(11.356, 1.09471)
 
 [node name="PlayerSword" type="Area2D"]
 position = Vector2(-10, -8)
-script = ExtResource("1_t502l")
+script = SubResource("GDScript_ex78x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9.53674e-07, 0)

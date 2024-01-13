@@ -2,7 +2,9 @@ extends StateMachine
 
 class_name CharacterStateMachine
 
-var face_dir: int = 1
+## not sure if these extra attributes should be here or in player.gd
+@export var face_dir: int = 1
+@export var has_sword: bool = true
 
 func _ready():
 	for child in get_children():
@@ -22,7 +24,6 @@ func _physics_process(delta):
 		switch_states(current_state.next_state)
 		
 	current_state.state_process(delta)
-	print(face_dir)
 
 func check_if_can_move():
 	return current_state.can_move
