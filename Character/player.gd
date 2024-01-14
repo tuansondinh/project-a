@@ -1,8 +1,17 @@
 extends CharacterBody2D
 
 class_name Player
+@export var player_number: int
+@export var move_right: String
+@export var move_left: String
+@export var move_up: String
+@export var move_down: String
+@export var jump: String
+@export var attack: String
+@export var throw: String
 @export var speed : float = 200.0
 @export var hanging_state: HangingState
+@export var dead_state: DeadState
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
@@ -18,21 +27,19 @@ func _ready():
 	animation_tree.active = true
 
 func _physics_process(delta):
-	direction = Input.get_vector("left", "right", "up", "down")
+	direction = Input.get_vector(move_left, move_right, move_up, move_down)
 
 	if direction.x != 0:
 		state_machine.face_dir = round(direction.x)
 	# Control whether to move or not to move
-	if direction.x != 0 and (not is_on_wall() or not Input.is_action_just_pressed("jump")):
+	if direction.x != 0 and (not is_on_wall() or not Input.is_action_just_pressed("jump")) and state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
-
 	move_and_slide()
 	update_animation_parameters()
 	update_facing_direction()
 		
-	
 func update_animation_parameters():
 	animation_tree.set("parameters/Move/blend_position", direction.x)
 
@@ -48,6 +55,7 @@ func throw_sword():
 	owner.add_child(sword)
 	sword.transform = $Muzzle.global_transform
 	sword.face_dir = state_machine.face_dir
+	sword.player = self
 
 func warp():
 	var char_col_shape: CollisionShape2D = $CollisionShape2D

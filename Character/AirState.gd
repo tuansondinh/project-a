@@ -17,7 +17,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var has_double_jumped = false
 
 func state_process(delta):
-	print(character.velocity.x)
 	character.velocity.y += gravity * delta
 	if character.is_on_floor():
 		next_state = landing_state

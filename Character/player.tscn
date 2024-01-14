@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://xxaoff7gwbrm"]
+[gd_scene load_steps=36 format=3 uid="uid://xxaoff7gwbrm"]
 
 [ext_resource type="Script" path="res://Character/player.gd" id="1_flj5s"]
 [ext_resource type="Texture2D" uid="uid://cf5vr3rdkcdr0" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_uohqy"]
@@ -6,12 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://cilbq1jmxocd0" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Jumlp-All/Jump-All-Sheet.png" id="5_fhfe2"]
 [ext_resource type="Script" path="res://Character/CharacterStateMachine.gd" id="7_utua3"]
 [ext_resource type="Script" path="res://Character/GroundState.gd" id="8_yi76h"]
-[ext_resource type="Script" path="res://HangingState.gd" id="9_nsu0j"]
+[ext_resource type="Script" path="res://Character/HangingState.gd" id="9_nsu0j"]
 [ext_resource type="Script" path="res://Character/AirState.gd" id="9_sg48e"]
 [ext_resource type="Script" path="res://Character/LandingState.gd" id="10_e7jjg"]
 [ext_resource type="Script" path="res://Character/AttackState.gd" id="10_io4on"]
 [ext_resource type="PackedScene" uid="uid://djnvmy147iuxj" path="res://sword.tscn" id="11_cgj2q"]
 [ext_resource type="Script" path="res://Character/StateDebugLabel.gd" id="11_xtov4"]
+[ext_resource type="Script" path="res://Character/DeadState.gd" id="12_yuwkl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ry2ya"]
 radius = 8.0
@@ -297,9 +298,10 @@ states/jump_start/position = Vector2(391, -5.75)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_i4ph4"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_2puwh"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_50dqq"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_3ny4h"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_kd0lq"), "double_jump", "jump_end", SubResource("AnimationNodeStateMachineTransition_8aae2")]
 graph_offset = Vector2(47.7799, -40.755)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hanging_state")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hanging_state", "dead_state")]
 script = ExtResource("1_flj5s")
 hanging_state = NodePath("CharacterStateMachine/HangingState")
+dead_state = NodePath("CharacterStateMachine/Dead")
 SwordScene = ExtResource("11_cgj2q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -361,6 +363,9 @@ landing_state = NodePath("../Landing")
 hanging_state = NodePath("../HangingState")
 attack_state = NodePath("../Attack")
 
+[node name="Dead" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("12_yuwkl")
+
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -50.0
 offset_top = -58.0
@@ -372,5 +377,12 @@ state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(3, 15)
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 9)
+shape = SubResource("CapsuleShape2D_ry2ya")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]

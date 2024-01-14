@@ -5,6 +5,7 @@ class_name CharacterStateMachine
 ## not sure if these extra attributes should be here or in player.gd
 @export var face_dir: int = 1
 @export var has_sword: bool = true
+@export var is_dead: bool = false
 
 func _ready():
 	for child in get_children():

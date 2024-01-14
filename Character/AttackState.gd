@@ -2,7 +2,6 @@ extends CharacterState
 
 class_name AttackState
 
-
 @export var jump_velocity : float = -150.0
 @export var air_state : State
 @export var hanging_state : State
@@ -19,8 +18,8 @@ func on_enter(_msg := {}) -> void:
 	var node: Node2D = Node2D.new()
 	sword = Sword.instantiate()
 	node.add_child(sword)
-
 	character.add_child(node)
+	sword.player = character
 	sword_anim_player = sword.get_node("AnimationPlayer")
 	if state_machine.face_dir == -1:
 		#character.scale.x = -1

@@ -1,3 +1,10 @@
 res://Levels/test_level.tscn
-res://sword.tscn
+res://Character/player.gd
 res://Character/player.tscn
+res://sword.tscn
+res://Character/AttackState.gd
+res://Character/GroundState.gd
+res://Character/CharacterStateMachine.gd
+res://sword.gd
+res://Character/AirState.gd
+res://Character/DeadState.gd

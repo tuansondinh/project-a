@@ -1441,9 +1441,14 @@ layer_0/tile_data = PackedInt32Array(393216, 65536, 1, 458752, 65536, 2, 524288,
 
 [node name="Player" parent="." instance=ExtResource("2_t7emj")]
 position = Vector2(-64, 49)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
+player_number = 1
+move_right = "right"
+move_left = "left"
+move_up = "up"
+move_down = "down"
+jump = "jump"
+attack = "attack"
+throw = "throw"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-64, 49)
@@ -1451,3 +1456,15 @@ process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Player2" parent="." node_paths=PackedStringArray("hanging_state") instance=ExtResource("2_t7emj")]
+position = Vector2(80, 47)
+player_number = 2
+move_right = "right2"
+move_left = "left2"
+move_up = "up2"
+move_down = "down2"
+jump = "jump2"
+hanging_state = NodePath("../Player/CharacterStateMachine/HangingState")
+
+[node name="Timer" type="Timer" parent="."]
