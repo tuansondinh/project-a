@@ -10,8 +10,12 @@ class_name AttackState
 @export var Sword : PackedScene
 @export var sword : Sword
 var sword_anim_player: AnimationPlayer
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 func state_process(delta):
-	pass
+	if !character.is_on_floor():
+		character.velocity.y += gravity * delta
+
 
 
 func on_enter(_msg := {}) -> void:
@@ -28,8 +32,8 @@ func on_enter(_msg := {}) -> void:
 	sword_anim_player.play("swing")
 	await sword_anim_player.animation_finished
 	sword.queue_free()
-	if !character.is_on_floor() :
-		next_state = air_state
+	if !character.is_on_floor():
+		state_machine.switch_states(air_state, {"no_jump": true})
 	else:
 		next_state  = ground_state
 

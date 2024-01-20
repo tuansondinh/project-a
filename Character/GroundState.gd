@@ -19,6 +19,9 @@ func state_input(event : InputEvent):
 		state_machine.switch_states(air_state, {do_jump = true})
 	if event.is_action_pressed(character.attack) && state_machine.has_sword:
 		next_state = attack_state
-	if event.is_action_pressed(character.throw) :
+	if event.is_action_pressed(character.throw):
 		character.handle_throw()
+		
+func on_enter(msg:= {}):
+	playback.travel("Move")
 	

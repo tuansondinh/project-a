@@ -1,9 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1705758520
+::res://::1705768337
 icon.svg::CompressedTexture2D::1701750855830309230::1705005586::1705005586::1::::<><>::
 README.md::TextFile::-1::1705005586::0::1::::<><>::
-sword.gd::GDScript::-1::1705268662::0::1::::Sword<>Area2D<>::
-sword.tscn::PackedScene::7819096343085372871::1705758471::0::1::::<><>::res://sword.gd<>uid://b352nkygv88xb::::res://Art/sword.png
+sword.gd::GDScript::-1::1705761190::0::1::::Sword<>Area2D<>::
+sword.tscn::PackedScene::7819096343085372871::1705768277::0::1::::<><>::res://sword.gd<>uid://b352nkygv88xb::::res://Art/sword.png
 ::res://Art/::1705005586
 sword.png::CompressedTexture2D::4415302774916078251::1705005586::1705005586::1::::<><>::
 ::res://Art/Legacy-Fantasy - High Forest 2.3/::1705005586
@@ -72,20 +72,20 @@ Golden-Tree.png::CompressedTexture2D::6878549809411101730::1705005586::170500558
 Green-Tree.png::CompressedTexture2D::725885093742723659::1705005586::1705005586::1::::<><>::
 Red-Tree.png::CompressedTexture2D::1209529535376390761::1705005586::1705005586::1::::<><>::
 Yellow-Tree.png::CompressedTexture2D::1752902837429214101::1705005586::1705005586::1::::<><>::
-::res://Character/::1705758512
-AirState.gd::GDScript::-1::1705323603::0::1::::AirState<>CharacterState<>::
+::res://Character/::1705768277
+AirState.gd::GDScript::-1::1705764480::0::1::::AirState<>CharacterState<>::
 AttackState.gd::GDScript::-1::1705233655::0::1::::AttackState<>CharacterState<>::
-CharacterState.gd::GDScript::-1::1705758455::0::1::::CharacterState<>State<>::
-CharacterStateMachine.gd::GDScript::-1::1705758353::0::1::::CharacterStateMachine<>StateMachine<>::
-DeadState.gd::GDScript::-1::1705233033::0::1::::DeadState<>CharacterState<>::
-GroundState.gd::GDScript::-1::1705758398::0::1::::GroundState<>CharacterState<>::
-HangingState.gd::GDScript::-1::1705172070::0::1::::HangingState<>CharacterState<>::
+CharacterState.gd::GDScript::-1::1705761288::0::1::::CharacterState<>State<>::
+CharacterStateMachine.gd::GDScript::-1::1705768173::0::1::::CharacterStateMachine<>StateMachine<>::
+DeadState.gd::GDScript::-1::1705762127::0::1::::DeadState<>CharacterState<>::
+GroundState.gd::GDScript::-1::1705764721::0::1::::GroundState<>CharacterState<>::
+HangingState.gd::GDScript::-1::1705766926::0::1::::HangingState<>CharacterState<>::
 LandingState.gd::GDScript::-1::1705005586::0::1::::<>CharacterState<>::
-player.gd::GDScript::-1::1705233792::0::1::::Player<>CharacterBody2D<>::
-player.tscn::PackedScene::1661849364936379042::1705758471::0::1::::<><>::res://Character/player.gd<>uid://cf5vr3rdkcdr0::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png<>uid://bvqkoppprkbil::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Run/Run-Sheet.png<>uid://cilbq1jmxocd0::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Jumlp-All/Jump-All-Sheet.png<>res://Character/CharacterStateMachine.gd<>res://Character/GroundState.gd<>res://Character/HangingState.gd<>res://Character/AirState.gd<>res://Character/LandingState.gd<>res://Character/AttackState.gd<>uid://djnvmy147iuxj::::res://sword.tscn<>res://Character/StateDebugLabel.gd<>res://Character/DeadState.gd
+player.gd::GDScript::-1::1705768136::0::1::::Player<>CharacterBody2D<>::
+player.tscn::PackedScene::1661849364936379042::1705768277::0::1::::<><>::res://Character/player.gd<>uid://cf5vr3rdkcdr0::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png<>uid://bvqkoppprkbil::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Run/Run-Sheet.png<>uid://cilbq1jmxocd0::::res://Art/Legacy-Fantasy - High Forest 2.3/Character/Jumlp-All/Jump-All-Sheet.png<>res://Character/CharacterStateMachine.gd<>res://Character/GroundState.gd<>res://Character/HangingState.gd<>res://Character/AirState.gd<>res://Character/LandingState.gd<>res://Character/AttackState.gd<>uid://djnvmy147iuxj::::res://sword.tscn<>res://Character/StateDebugLabel.gd<>res://Character/DeadState.gd
 State.gd::GDScript::-1::1705758512::0::1::::State<>Node<>::
-StateDebugLabel.gd::GDScript::-1::1705005586::0::1::::<>Label<>::
-StateMachine.gd::GDScript::-1::1705005925::0::1::::StateMachine<>Node<>::
-::res://Levels/::1705758471
-test_level.gd::GDScript::-1::1705234863::0::1::::<>Node2D<>::
-test_level.tscn::PackedScene::8026915360369246657::1705758471::0::1::::<><>::res://Levels/test_level.gd<>uid://cnb6vef35n3ad::::res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png<>uid://cqrqnlx2jpsop::::res://Art/Legacy-Fantasy - High Forest 2.3/Background/Background.png<>uid://xxaoff7gwbrm::::res://Character/player.tscn
+StateDebugLabel.gd::GDScript::-1::1705760247::0::1::::<>Label<>::
+StateMachine.gd::GDScript::-1::1705765554::0::1::::StateMachine<>Node<>::
+::res://Levels/::1705768277
+test_level.gd::GDScript::-1::1705763981::0::1::::<>Node2D<>::
+test_level.tscn::PackedScene::8026915360369246657::1705768277::0::1::::<><>::res://Levels/test_level.gd<>uid://cnb6vef35n3ad::::res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png<>uid://cqrqnlx2jpsop::::res://Art/Legacy-Fantasy - High Forest 2.3/Background/Background.png<>uid://xxaoff7gwbrm::::res://Character/player.tscn

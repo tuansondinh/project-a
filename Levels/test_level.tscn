@@ -1460,7 +1460,7 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Player2" parent="." node_paths=PackedStringArray("hanging_state") instance=ExtResource("2_t7emj")]
+[node name="Player2" parent="." instance=ExtResource("2_t7emj")]
 position = Vector2(80, 47)
 player_number = 2
 move_right = "right2"
@@ -1470,7 +1470,6 @@ move_down = "down2"
 jump = "jump2"
 attack = "attack2"
 throw = "throw2"
-hanging_state = NodePath("../Player/CharacterStateMachine/HangingState")
 
 [node name="ReviveTimer" type="Timer" parent="."]
 

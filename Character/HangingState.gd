@@ -9,13 +9,13 @@ var has_double_jumped = false
 var sword : Sword
 
 func state_process(delta):
+	#fdgaprint(character.velocity.y)
 	character.velocity.y = 0
 	# no gravity
 	pass
 	
 func state_input(event : InputEvent):
-	print(event)
-	print(character.jump)
+	
 	if event.is_action_pressed(character.jump):
 		print("jump bro")
 		jump()

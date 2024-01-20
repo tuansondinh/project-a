@@ -6,6 +6,7 @@ class_name CharacterStateMachine
 @export var face_dir: int = 1
 @export var has_sword: bool = true
 @export var warp_cool_down_timer: Timer
+@onready var character : CharacterBody2D = owner
 
 func _ready():
 	for child in get_children():
@@ -13,6 +14,8 @@ func _ready():
 			states.append(child)
 			child.state_machine = self
 			# Set the states up with what they need to function
+			print(child)
+			print(character)
 			child.character = character
 
 			child.playback = animation_tree["parameters/playback"]
