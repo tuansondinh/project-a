@@ -5,8 +5,6 @@ class_name CharacterStateMachine
 ## not sure if these extra attributes should be here or in player.gd
 @export var face_dir: int = 1
 @export var has_sword: bool = true
-@export var is_dead: bool = false
-@export var can_throw: bool = true
 @export var warp_cool_down_timer: Timer
 
 func _ready():
@@ -46,8 +44,9 @@ func _input(event : InputEvent):
 
 
 func _on_warp_cooldown_timer_timeout():
-	can_throw = true
+	current_state.can_throw = true 
 	
 func handle_throw_cool_down():
 	warp_cool_down_timer.start()
-	can_throw = false
+	current_state.can_throw = false
+	

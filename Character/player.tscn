@@ -298,11 +298,13 @@ states/jump_start/position = Vector2(391, -5.75)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_i4ph4"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_2puwh"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_50dqq"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_3ny4h"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_kd0lq"), "double_jump", "jump_end", SubResource("AnimationNodeStateMachineTransition_8aae2")]
 graph_offset = Vector2(47.7799, -40.755)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hanging_state", "dead_state")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hanging_state", "dead_state", "char_col_shape", "air_state")]
 script = ExtResource("1_flj5s")
 hanging_state = NodePath("CharacterStateMachine/HangingState")
 dead_state = NodePath("CharacterStateMachine/Dead")
 SwordScene = ExtResource("11_cgj2q")
+char_col_shape = NodePath("CollisionShape2D")
+air_state = NodePath("CharacterStateMachine/Air")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

@@ -30,7 +30,7 @@ func check_if_can_move():
 	return current_state.can_move
 
 
-func switch_states(new_state : State, msg: Dictionary = {}):
+func switch_states(new_state : CharacterState, msg: Dictionary = {}):
 	if current_state != null:
 		current_state.on_exit()
 		current_state.next_state = null

@@ -20,7 +20,6 @@ func state_process(delta):
 	character.velocity.y += gravity * delta
 	if character.is_on_floor():
 		next_state = landing_state
-	#wall_slide(delta)
 		
 func state_input(event : InputEvent):
 	if event.is_action_pressed(character.jump) && character.is_on_wall():
@@ -47,6 +46,10 @@ func on_enter(msg:= {}):
 	if msg.has("do_jump"):
 		character.velocity.y = jump_velocity
 		playback.travel(jump_animation)
+	elif msg.has("do_revive"):
+		can_attack = true
+		can_move = true
+		can_throw = true
 		
 func on_exit():
 	if next_state == landing_state:

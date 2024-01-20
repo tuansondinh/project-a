@@ -5,3 +5,10 @@ res://Character/player.tscn
 res://Character/StateDebugLabel.gd
 res://Character/player.gd
 res://Character/AirState.gd
+res://sword.gd
+res://sword.tscn
+res://Levels/test_level.gd
+res://Character/DeadState.gd
+res://Character/StateMachine.gd
+res://Character/CharacterState.gd
+res://Character/HangingState.gd

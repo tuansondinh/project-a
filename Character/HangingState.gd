@@ -14,7 +14,10 @@ func state_process(delta):
 	pass
 	
 func state_input(event : InputEvent):
-	if(event.is_action_pressed("jump")):
+	print(event)
+	print(character.jump)
+	if event.is_action_pressed(character.jump):
+		print("jump bro")
 		jump()
 		
 func jump():

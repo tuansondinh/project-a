@@ -5,6 +5,7 @@ class_name CharacterState
 @export var character: Player
 @export var can_move: bool = true
 @export var can_attack: bool = true
+@export var can_throw: bool = true
 var state_machine: CharacterStateMachine
 
 @export var muzzle: Marker2D

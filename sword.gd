@@ -33,7 +33,6 @@ func _on_body_entered(body):
 			body.state_machine.has_sword = true
 			queue_free()
 	elif body is Player and !entered and (body as Player).player_number != player.player_number:
-		body.queue_free()
-#		var timer: Timer = get_parent().get_parent().get_parent().get_node("Timer")
-#		print(get_parent().get_parent().get_parent())
-#		timer.start()
+		(body as Player).die()
+	
+
