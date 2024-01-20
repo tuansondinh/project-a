@@ -6,10 +6,12 @@ class_name CharacterStateMachine
 @export var face_dir: int = 1
 @export var has_sword: bool = true
 @export var is_dead: bool = false
+@export var can_throw: bool = true
+@export var warp_cool_down_timer: Timer
 
 func _ready():
 	for child in get_children():
-		if(child is CharacterState):
+		if child is CharacterState:
 			states.append(child)
 			child.state_machine = self
 			# Set the states up with what they need to function
@@ -41,3 +43,11 @@ func switch_states(new_state : State, msg: Dictionary = {}):
 
 func _input(event : InputEvent):
 	current_state.state_input(event)
+
+
+func _on_warp_cooldown_timer_timeout():
+	can_throw = true
+	
+func handle_throw_cool_down():
+	warp_cool_down_timer.start()
+	can_throw = false

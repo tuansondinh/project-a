@@ -3,9 +3,9 @@ extends CharacterState
 class_name GroundState
 
 @export var jump: String
-@export var air_state : State
-@export var hanging_state: State 
-@export var attack_state: State 
+@export var air_state : CharacterState
+@export var hanging_state: CharacterState 
+@export var attack_state: CharacterState 
 @export var SwordScene : PackedScene
 var overlapping_bodies: Array
 var sword: Sword
@@ -19,11 +19,6 @@ func state_input(event : InputEvent):
 		state_machine.switch_states(air_state, {do_jump = true})
 	if event.is_action_pressed(character.attack) && state_machine.has_sword:
 		next_state = attack_state
-	if event.is_action_pressed(character.throw):
-		if state_machine.has_sword:
-			print("throw")
-			character.throw_sword()
-		else:
-			print("warp")
-			character.warp()
+	if event.is_action_pressed(character.throw) :
+		character.handle_throw()
 	

@@ -23,19 +23,16 @@ func state_process(delta):
 	#wall_slide(delta)
 		
 func state_input(event : InputEvent):
-	if event.is_action_pressed("jump") && character.is_on_wall():
+	if event.is_action_pressed(character.jump) && character.is_on_wall():
 		character.velocity.y = wall_jump_velocity
 		if state_machine.face_dir == 1:
 			character.velocity.x = -push_back_velocity
 		else:
 			character.velocity.x = push_back_velocity
 
-	if event.is_action_pressed("ui_right"):
-		if state_machine.has_sword:
-			character.throw_sword()
-		else:
-			character.warp()
-	if event.is_action_pressed("ui_left") && state_machine.has_sword:
+	if event.is_action_pressed(character.throw):
+		character.handle_throw()
+	if event.is_action_pressed(character.attack) && state_machine.has_sword:
 		next_state = attack_state
 	
 		
@@ -52,6 +49,6 @@ func on_enter(msg:= {}):
 		playback.travel(jump_animation)
 		
 func on_exit():
-	if(next_state == landing_state):
+	if next_state == landing_state:
 		playback.travel(landing_animation)
 		has_double_jumped = false

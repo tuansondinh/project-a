@@ -48,7 +48,15 @@ func update_facing_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
-		
+
+func handle_throw():
+	if state_machine.has_sword:
+			if state_machine.can_throw:
+				throw_sword()
+				state_machine.handle_throw_cool_down()
+	else:
+		warp()
+	
 func throw_sword():
 	state_machine.has_sword = false
 	sword = SwordScene.instantiate()

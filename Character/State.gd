@@ -4,7 +4,6 @@ class_name State
 
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State
-var state_machine : StateMachine = null;
 
 func state_process(delta) -> void:
 	pass
