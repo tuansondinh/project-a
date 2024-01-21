@@ -17,7 +17,8 @@ func state_process(delta):
 func state_input(event : InputEvent):
 	if event.is_action_pressed(character.jump):
 		state_machine.switch_states(air_state, {do_jump = true})
-	if event.is_action_pressed(character.attack) && state_machine.has_sword:
+	if event.is_action_pressed(character.attack) && state_machine.check_if_can_attack():
+		state_machine.handle_attack_cool_down()
 		next_state = attack_state
 	if event.is_action_pressed(character.throw):
 		character.handle_throw()

@@ -55,7 +55,7 @@ func update_facing_direction():
 
 func handle_throw():
 	if state_machine.has_sword:
-			if state_machine.current_state.can_throw:
+			if state_machine.can_throw:
 				throw_sword()
 				state_machine.handle_throw_cool_down()
 	else:

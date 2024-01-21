@@ -33,7 +33,7 @@ func state_input(event : InputEvent):
 
 	if event.is_action_pressed(character.throw):
 		character.handle_throw()
-	if event.is_action_pressed(character.attack) && state_machine.has_sword:
+	if event.is_action_pressed(character.attack) && state_machine.check_if_can_attack():
 		next_state = attack_state
 	
 		
@@ -50,9 +50,7 @@ func on_enter(msg:= {}):
 		character.velocity.y = jump_velocity
 		playback.travel(jump_animation)
 	elif msg.has("do_revive"):
-		can_attack = true
 		can_move = true
-		can_throw = true
 		
 		
 func on_exit():

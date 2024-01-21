@@ -10,8 +10,6 @@ func state_process(delta):
 
 func on_enter(_msg := {}) -> void:
 	can_move = false
-	can_attack = false
-	can_throw = false
 	character.set_collision_layer_value(1, false)
 	character.set_collision_layer_value(32, true)
 	character.set_collision_mask_value(1, false)

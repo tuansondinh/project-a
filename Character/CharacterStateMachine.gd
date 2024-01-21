@@ -1,12 +1,17 @@
-extends StateMachine
-
+extends Node
 class_name CharacterStateMachine
 
-## not sure if these extra attributes should be here or in player.gd
-@export var face_dir: int = 1
-@export var has_sword: bool = true
+## need to hold some attributes here instead of in state because of "parallel states"
+var face_dir: int = 1
+var has_sword: bool = true
+var can_throw: bool = true
+var can_attack:bool = true
 @export var warp_cool_down_timer: Timer
-@onready var character : CharacterBody2D = owner
+@export var attack_cool_down_timer: Timer
+@export var animation_tree : AnimationTree
+@export var current_state : CharacterState
+@export var character : Player
+var states : Array[CharacterState]
 
 func _ready():
 	for child in get_children():
@@ -14,12 +19,8 @@ func _ready():
 			states.append(child)
 			child.state_machine = self
 			# Set the states up with what they need to function
-			print(child)
-			print(character)
 			child.character = character
-
 			child.playback = animation_tree["parameters/playback"]
-			
 		else:
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
 
@@ -45,11 +46,21 @@ func switch_states(new_state : State, msg: Dictionary = {}):
 func _input(event : InputEvent):
 	current_state.state_input(event)
 
-
+func check_if_can_attack():
+	return can_attack && has_sword
+	
 func _on_warp_cooldown_timer_timeout():
-	current_state.can_throw = true 
+	can_throw = true 
 	
 func handle_throw_cool_down():
 	warp_cool_down_timer.start()
-	current_state.can_throw = false
+	can_throw = false
+
+func _on_attack_cooldown_timer_timeout():
+	can_attack = true
+
+func handle_attack_cool_down():
+	attack_cool_down_timer.start()
+	can_attack = false
 	
+
